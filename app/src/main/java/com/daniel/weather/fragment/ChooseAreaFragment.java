@@ -1,6 +1,7 @@
 package com.daniel.weather.fragment;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.daniel.weather.R;
 import com.daniel.weather.db.City;
 import com.daniel.weather.db.County;
 import com.daniel.weather.db.Province;
+import com.daniel.weather.ui.WeatherActivity;
 import com.daniel.weather.utils.HttpUtil;
 import com.daniel.weather.utils.Utility;
 
@@ -90,6 +92,12 @@ public class ChooseAreaFragment extends Fragment {
                 }else if(currentLevel==LEVEL_CITY){
                     selectedCity=cityList.get(position);
                     queryCountys();
+                }else if(currentLevel==LEVEL_COUNTY){
+                    String wearthId=countyList.get(position).getWeatherId();
+                    Intent intent=new Intent(getActivity(), WeatherActivity.class);
+                    intent.putExtra("weather_id",wearthId);
+                    startActivity(intent);
+                    getActivity().finish();
                 }
             }
         });

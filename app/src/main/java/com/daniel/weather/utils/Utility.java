@@ -6,6 +6,8 @@ import android.widget.TextView;
 import com.daniel.weather.db.City;
 import com.daniel.weather.db.County;
 import com.daniel.weather.db.Province;
+import com.daniel.weather.gson.Weather;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
@@ -17,6 +19,21 @@ import org.json.JSONObject;
  */
 public class Utility {
 
+
+    public static Weather handleWeatherResponse(String response){
+        try{
+            JSONObject jsonObject=new JSONObject(response);
+            JSONArray jsonArray=jsonObject.getJSONArray("HeWeather");
+            String weatherContent=jsonArray.getJSONObject(0).toString();
+            return new Gson().fromJson(weatherContent,Weather.class);
+
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        return null;
+
+    }
     /**
      * 解析和处理服务返回的省级数据
      * @param response
