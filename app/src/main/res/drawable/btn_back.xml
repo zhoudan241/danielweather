@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 没有焦点时的背景图片 -->
+    <item android:state_window_focused="false"     android:drawable="@drawable/back_btn_click" /> <!-- 未点击时的颜色 -->
+
+    <!--选中时的图片背景-->
+
+    <!--<item android:state_selected="true"   android:drawable="@drawable/volume_up_btn_nor" />-->
+
+    <!--获得焦点时的图片背景-->
+
+    <item android:state_focused="true"   android:drawable="@drawable/back_btn" />
+
+    <!--点击时的图片背景-->
+
+    <item android:state_pressed="true" android:drawable="@drawable/back_btn" />
+</selector>
