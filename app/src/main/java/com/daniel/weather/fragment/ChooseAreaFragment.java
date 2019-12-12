@@ -14,10 +14,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.daniel.weather.DanielWeatherApplication;
+import com.daniel.weather.MainActivity;
 import com.daniel.weather.R;
 import com.daniel.weather.db.City;
 import com.daniel.weather.db.County;
 import com.daniel.weather.db.Province;
+import com.daniel.weather.gson.Weather;
 import com.daniel.weather.ui.WeatherActivity;
 import com.daniel.weather.utils.HttpUtil;
 import com.daniel.weather.utils.Utility;
@@ -94,10 +96,18 @@ public class ChooseAreaFragment extends Fragment {
                     queryCountys();
                 }else if(currentLevel==LEVEL_COUNTY){
                     String wearthId=countyList.get(position).getWeatherId();
-                    Intent intent=new Intent(getActivity(), WeatherActivity.class);
-                    intent.putExtra("weather_id",wearthId);
-                    startActivity(intent);
-                    getActivity().finish();
+                    if(getActivity() instanceof MainActivity){
+                        Intent intent=new Intent(getActivity(), WeatherActivity.class);
+                        intent.putExtra("weather_id",wearthId);
+                        startActivity(intent);
+                        getActivity().finish();
+                    }else{
+                        WeatherActivity activity=(WeatherActivity)getActivity();
+                        activity.drawer_layout.closeDrawers();
+                        activity.swipe_refresh.setRefreshing(true);
+                        activity.requestWeather(wearthId);
+                    }
+
                 }
             }
         });
